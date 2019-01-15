@@ -1,5 +1,5 @@
 
-# Scoop Project
+# Skoop Project
 
 CSV validate and list order project
 
@@ -31,7 +31,7 @@ Change the database credentials in the dbconn.php
 
 Log on to the uploaded folder through the web server
 ```
-Loggin Credentials: User Name=admin, Password=scoopadmin
+Loggin Credentials: User Name=admin, Password=skoopadmin
 ```
 ```
 Once logged in loggin credentials can be changed.
