@@ -1,85 +1,82 @@
 <?php
-include_once './includes/template.php';
-include_once './includes/dbconn.php';
+    include_once './includes/template.php';
+    include_once './includes/dbconn.php';
 
-$notLogged = true;
-if(@$_SESSION['loggedIn']){$notLogged = false;}
-if($notLogged){header('Location: index.php?operation=logOut');}
-
-
-if (isset($_GET['pageno'])) {
-    $pageno = $_GET['pageno'];
-} else {
-    $pageno = 1;
-}
-$no_of_records_per_page = 10;
-$offset = ($pageno-1) * $no_of_records_per_page;
-
-/*
-$conn=mysqli_connect("localhost","my_user","my_password","my_db");
-// Check connection
-if (mysqli_connect_errno()){
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    die();
-}
-*/
-
-$total_pages_sql = "SELECT COUNT(*) FROM orders";
-$result = mysqli_query($connection,$total_pages_sql);
-$total_rows = mysqli_fetch_array($result)[0];
-$total_pages = ceil($total_rows / $no_of_records_per_page);
-
-$sql = "SELECT * FROM orders LIMIT $offset, $no_of_records_per_page";
-$res_data = mysqli_query($connection,$sql);
+    $notLogged = true;
+    if(@$_SESSION['loggedIn']){$notLogged = false;}
+    if($notLogged){header('Location: index.php?operation=logOut');}
 
 
+    if (isset($_GET['pageno'])) {$pageno = $_GET['pageno'];} else {$pageno = 1;}
 
-echo'
+    $no_of_records_per_page = 10;
+    $offset = ($pageno-1) * $no_of_records_per_page;
+
+    $total_pages_sql = "SELECT COUNT(*) FROM orders";
+    $result = mysqli_query($connection,$total_pages_sql);
+    $total_rows = mysqli_fetch_array($result)[0];
+    $total_pages = ceil($total_rows / $no_of_records_per_page);
+
+    $sql = "SELECT * FROM orders LIMIT $offset, $no_of_records_per_page";
+    $res_data = mysqli_query($connection,$sql);
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
-        '.$headerLinks.'
+        <?php echo $headerLinks; ?> 
     </head>
-    <body>';
+    <body>
+        <?php echo str_replace('{{home}}', 'active', $navBar); ?>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">List of Past Orders</div>
+                <div class="card-body">                                        
+                    <table class="table table-dark table-striped table-hover">
+                        <thead>
+                            <tr><th>Ordr #</th><th>Order Date</th><th>Name</th><th>Email</th><th>Mobile</th><th>Shipping Status</th></tr>
+                        </thead>
+                        <tbody>        
+                        <?php
+                            while($row = mysqli_fetch_array($res_data)){                        
+                                echo '<tr id="'.$row['id'].'" class="orderRow"><td>'.$row['order_id'].'</td><td></td><td>'.$row['name'].'</td><td>'.$row['email'].'</td><td>'.$row['mobile'].'</td><td>'.$row['status'].'</td></tr>';
+                                echo '<tr id="detailRow'.$row['id'].'" style="display:none;"><td colspan="2">Product Code : '.$row['product_code'].'</td><td>Adress :</td><td colspan="4">'.$row['address_line_one'].'<br/>'.$row['address_line_two'].'<br/>'.$row['suburb'].' '.$row['state'].' '.$row['postcode'].'</td></tr>';
+                            }
+                        ?>
+                        </tbody>
+                    </table>
 
-echo str_replace('{{home}}', 'active', $navBar);
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item"><a class="page-link" href="?pageno=1">First</a></li>
+                        <li class="page-item <?php if($pageno <= 1){ echo 'disabled'; } ?>">
+                            <a class="page-link" href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
+                        </li>
+                        <li class="page-item <?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                            <a class="page-link" href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
+                    </ul>
+                </div>
+            </div>
 
-echo '
-<div class="container">
-    <h4>Item List of Job Number : </h4>
             
-    <table class="table table-dark table-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Item Type</th>
-            <th>Item Name</th>
-            <th>Item Info</th>
-            <th>Length</th>                
-            <th>Final Length</th>                
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-    ';
+        </div>
+    </body>
+    <script>
+        $(".orderRow").click(function(){            
+            window.location.href = "./orderDetails.php?ID="+this.id;
+        });
 
-while($row = mysqli_fetch_array($res_data)){
-    //here goes the data
-    echo '<tr><td>'.$row['name'].'</td></tr>';
-}
+        $(".orderRow").hover(function(){  
+            detailRowid="detailRow"+this.id;        
+            $("#"+detailRowid).show();
+        });
 
-?>
-<ul class="pagination">
-        <li><a href="?pageno=1">First</a></li>
-        <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
-            <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
-        </li>
-        <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-            <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
-        </li>
-        <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
-    </ul>
-</body>
+        $(".orderRow").mouseout(function(){  
+            detailRowid="detailRow"+this.id;        
+            $("#"+detailRowid).hide();
+        });        
+    </script>
 </html>
 
 <?php mysqli_close($connection); ?>
