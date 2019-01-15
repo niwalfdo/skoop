@@ -7,8 +7,6 @@
     if($notLogged){header('Location: index.php?operation=logOut');}
 ?>
 
-
-
 <!DOCTYPE html>
 <html>
     <head>

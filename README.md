@@ -41,8 +41,6 @@ Once logged in loggin credentials can be changed.
 
 * **Niwal Fernando** -  [Niwal Fernando](https://github.com/niwalfdo)
 
-See also the list of [contributors](https://github.com/niwalfdo/scoop/contributors) who participated in this project.
-
 ## License
 
 This project is licensed under the The GNU General Public License.
