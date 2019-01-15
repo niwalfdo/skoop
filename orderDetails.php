@@ -57,7 +57,7 @@
                             <tbody> 
                             <?php                                
                                 while($row = mysqli_fetch_array($ordersByCustomer)){ 
-                                    echo '<tr><td>'.$row['order_id'].'</td><td></td><td>'.$row['name'].'</td><td>'.$row['email'].'</td><td>'.$row['mobile'].'</td><td>'.$row['status'].'</td></tr>';                                                           
+                                    echo '<tr><td>'.$row['order_id'].'</td><td>'.$row['create_date'].'</td><td>'.$row['name'].'</td><td>'.$row['email'].'</td><td>'.$row['mobile'].'</td><td>'.$row['status'].'</td></tr>';                                                           
                                 }
                             ?> 
                             </tbody>

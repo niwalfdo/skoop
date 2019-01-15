@@ -7,10 +7,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js" type="text/javascript"></script>    
-    <script src="https://unpkg.com/sweetalert2@7.3.0/dist/sweetalert2.all.js"></script> 
-    ';
-    $jsScript = '<script src="./includes/app.js"></script>';
-    $chosenScript = '<script src="./lib/chosen/docsupport/init.js" type="text/javascript" charset="utf-8"></script>';
+    <script src="https://unpkg.com/sweetalert2@7.3.0/dist/sweetalert2.all.js"></script>';
+
+    $chartsScript = '
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>';
+
+    $jsScript = '<script src="./includes/app.js"></script>';    
+      
 
     $navBar = '
     <nav class="navbar navbar-expand-sm bg-dark  navbar-dark">
@@ -33,6 +38,9 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item {{reports}}">
+                <a class="nav-link" href="./reports.php">Reports</a>            
+            </li>
             <li class="nav-item {{account}}">
                 <a class="nav-link" href="./account.php">My Account</a>            
             </li>

@@ -39,7 +39,7 @@
                         <tbody>        
                         <?php
                             while($row = mysqli_fetch_array($res_data)){                        
-                                echo '<tr id="'.$row['id'].'" class="orderRow"><td>'.$row['order_id'].'</td><td></td><td>'.$row['name'].'</td><td>'.$row['email'].'</td><td>'.$row['mobile'].'</td><td>'.$row['status'].'</td></tr>';
+                                echo '<tr id="'.$row['id'].'" class="orderRow"><td>'.$row['order_id'].'</td><td>'.$row['create_date'].'</td><td>'.$row['name'].'</td><td>'.$row['email'].'</td><td>'.$row['mobile'].'</td><td>'.$row['status'].'</td></tr>';
                                 echo '<tr id="detailRow'.$row['id'].'" style="display:none;"><td colspan="2">Product Code : '.$row['product_code'].'</td><td>Adress :</td><td colspan="4">'.$row['address_line_one'].'<br/>'.$row['address_line_two'].'<br/>'.$row['suburb'].' '.$row['state'].' '.$row['postcode'].'</td></tr>';
                             }
                         ?>

@@ -120,7 +120,7 @@ function ajaxAddDataQ(url, rowNo){
 
     xmlhttp.onreadystatechange = function(){
         if(xmlhttp.readyState == 4 && xmlhttp.status == 200){            
-            //console.log(xmlhttp.responseText);
+            console.log(xmlhttp.responseText);
             dataInsertResponse(xmlhttp.responseText, rowNo);                                                                                          
         }
     }
@@ -130,10 +130,11 @@ function ajaxAddDataQ(url, rowNo){
 }
 
 function dataInsertResponse(response, i){
+    response=response.trim();
     id="#trID"+i;
     if(response=="inserted"){
         $(id).css("background-color", "#4CAF50");
-    }else{
+    }else{        
         $(id).css("background-color", "#D20117");
     }
     

@@ -20,15 +20,16 @@
     $state = $csvData["state"];
     $postcode = $csvData["postcode"];
     $country = $csvData["country"];
+    $curDate = date("Y-m-d");
 
-    $sql = "INSERT INTO orders (order_id, product_code, name, email, mobile, address_line_one, address_line_two, suburb, state, postcode, country, status) 
-    VALUES ('".$order_id."', '".$product_code."', '".$name."', '".$email."', '".$mobile."', '".$address_line_one."', '".$address_line_two."', '".$suburb."', '".$state."', '".$postcode."', '".$country."', '".$country."' );";
+    $sql = "INSERT INTO orders (order_id, product_code, name, email, mobile, address_line_one, address_line_two, suburb, state, postcode, country, status, create_date) 
+    VALUES ('".$order_id."', '".$product_code."', '".$name."', '".$email."', '".$mobile."', '".$address_line_one."', '".$address_line_two."', '".$suburb."', '".$state."', '".$postcode."', '".$country."', '".$country."',  '".$curDate."');";
     
-        if ($connection->query($sql) === TRUE) {        
-            echo 'inserted';
-        } else {        
-            echo $connection->error;
-        }
+    if ($connection->query($sql) === TRUE) {        
+        echo 'inserted';
+    } else {        
+        echo 'SQL Error : '.$connection->error;
+    }
 
     if($operation == 'updateUserPass'){
         @$oldPsssword = md5($_POST['oldPsssword']);
