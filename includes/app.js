@@ -4,6 +4,7 @@ $(".productID").focusout(function(){
         csvJSON[this.id]["order_id"] = this.value;
         $(this).css("border", "solid green 1px");
         totalErrors=totalErrors-1;
+        csvJSON[this.id]["errors"] = csvJSON[this.id]["errors"]-1;
         errorDisplay(totalErrors);
     }else{
         swal("Not valid product ID");
@@ -15,6 +16,7 @@ $(".customerName").focusout(function(){
         csvJSON[this.id]["name"] = this.value;
         $(this).css("border", "solid green 1px");
         totalErrors=totalErrors-1;
+        csvJSON[this.id]["errors"] = csvJSON[this.id]["errors"]-1;
         errorDisplay(totalErrors);
     }else{
         swal("Value can not be empty");
@@ -27,6 +29,7 @@ $(".email").focusout(function(){
         csvJSON[this.id]["email"] = this.value;
         $(this).css("border", "solid green 1px");
         totalErrors=totalErrors-1;
+        csvJSON[this.id]["errors"] = csvJSON[this.id]["errors"]-1;
         errorDisplay(totalErrors);
     }else{
         swal("Not a valid Email");
@@ -38,6 +41,7 @@ $(".addressOne").focusout(function(){
         csvJSON[this.id]["address_line_one"] = this.value;
         $(this).css("border", "solid green 1px");
         totalErrors=totalErrors-1;
+        csvJSON[this.id]["errors"] = csvJSON[this.id]["errors"]-1;
         errorDisplay(totalErrors);
     }else{
         swal("Value can not be empty");
@@ -49,6 +53,7 @@ $(".postCode").focusout(function(){
         csvJSON[this.id]["postcode"] = this.value;
         $(this).css("border", "solid green 1px");
         totalErrors=totalErrors-1;
+        csvJSON[this.id]["errors"] = csvJSON[this.id]["errors"]-1;
         errorDisplay(totalErrors);
     }else{
         swal("Post code must be 4 or more characters");
@@ -61,6 +66,7 @@ $(".state").focusout(function(){
         csvJSON[this.id]["state"] = this.value;
         $(this).css("border", "solid green 1px");
         totalErrors=totalErrors-1;
+        csvJSON[this.id]["errors"] = csvJSON[this.id]["errors"]-1;
         errorDisplay(totalErrors);
     }else{
         swal("State must be 4 one of 'NSW, ACT, VIC, QLD, SA, NT, TA'");
@@ -72,6 +78,7 @@ $(".country").focusout(function(){
         csvJSON[this.id]["country"] = this.value;
         $(this).css("border", "solid green 1px");
         totalErrors=totalErrors-1;
+        csvJSON[this.id]["errors"] = csvJSON[this.id]["errors"]-1;
         errorDisplay(totalErrors);
     }else{
         swal("Value can not be empty");
